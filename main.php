@@ -78,9 +78,9 @@ class Insert_Post_Into_Post
 		//
 		// Add slash before and after site path.
 		//
-		if( $path[0] !== '/' )
+		if( $path[0] != '/' )
 			$path = '/'.$path;
-		if( $path[ $path.length-1 ] !== '/' )
+		if( $path[ strlen($path)-1 ] != '/' )
 			$path = $path.'/';
 
 		//
@@ -164,7 +164,10 @@ class Insert_Post_Into_Post
 		if( $query->have_posts() )
 		{
 			$query->the_post();
-			$content = '<div class="post"><h2 class="entry-title"><a href="'.esc_url( get_permalink( get_the_ID() ) ).'" rel="bookmark" title="Permanent Link to '.the_title_attribute(array('echo'=>FALSE)).'">'.get_the_title().'</a></h2><div class="entry-content">'.wpautop(get_the_content()).'</div></div>';
+			if( get_the_title() !== 'Home' && get_the_title() !== 'Overview' )
+				$content = '<div class="post"><h2 class="entry-title">'.get_the_title().'</h2><div class="entry-content">'.wpautop(get_the_content()).'</div></div>';
+			else
+				$content = '<div class="post"><div class="entry-content">'.wpautop(get_the_content()).'</div></div>';
 		}
 	
 		wp_reset_query();
@@ -195,7 +198,10 @@ class Insert_Post_Into_Post
 			while( $query->have_posts() )
 			{
 				$query->the_post();
-				$content .= '<div class="post"><h2 class="entry-title"><a href="'.esc_url( get_permalink( get_the_ID() ) ).'" rel="bookmark" title="Permanent Link to '.the_title_attribute(array('echo'=>FALSE)).'">'.get_the_title().'</a></h2><div class="entry-content">'.wpautop(get_the_content()).'</div></div>';
+				if( get_the_title() !== 'Home' && get_the_title() !== 'Overview' )
+					$content = '<div class="post"><h2 class="entry-title">'.get_the_title().'</h2><div class="entry-content">'.wpautop(get_the_content()).'</div></div>';
+				else
+					$content = '<div class="post"><div class="entry-content">'.wpautop(get_the_content()).'</div></div>';
 			}
 		}
 	

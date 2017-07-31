@@ -4,8 +4,9 @@ Plugin Name: Insert Post Into Post
 Plugin URI: none
 Description: Inserts a post or page into a WordPress page using shortcode.
 Author: Crystal Barton
-Version: 1.0
+Version: 1.1.0
 Author URI: http://www.uncc.edu
+GitHub Plugin URI: https://github.com/clas-web/insert-post-into-post
 */
 
 add_filter( 'the_content', array('Insert_Post_Into_Post', 'process_content') );
